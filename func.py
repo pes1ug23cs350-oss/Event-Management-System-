@@ -5,8 +5,8 @@ def get_connection():
     return mysql.connector.connect(
         host="localhost",
         user="root",
-        password="Manohar@123",
-        database="final_project"
+        password="Your_db_password",
+        database="event_management"
     )
 
 # ----------------- User Login -----------------
@@ -26,56 +26,8 @@ def get_events():
     rows = cursor.fetchall()
     conn.close()
     return rows
+
 def register_for_event(user_id, event_id, ticket_type):
-    # conn = get_connection()
-    # cursor = conn.cursor()
-    # try:
-    #     # Get ticket_id for the given event and ticket_type
-    #     cursor.execute("""
-    #         SELECT ticket_id, quantity_available 
-    #         FROM Tickets 
-    #         WHERE event_id=%s AND ticket_type=%s
-    #     """, (event_id, ticket_type))
-        
-    #     ticket_result = cursor.fetchone()
-    #     if not ticket_result:
-    #         return False, "Ticket type not found for this event"
-        
-    #     ticket_id, quantity = ticket_result
-        
-    #     if quantity <= 0:
-    #         return False, "Tickets sold out for this type"
-        
-    #     # Check if user already registered for this event
-    #     cursor.execute("""
-    #         SELECT 1 FROM Registrations 
-    #         WHERE user_id=%s AND event_id=%s
-    #     """, (user_id, event_id))
-        
-    #     if cursor.fetchone():
-    #         return False, "You are already registered for this event"
-        
-    #     # Insert registration
-    #     cursor.execute("""
-    #         INSERT INTO Registrations (user_id, event_id, ticket_id, registration_date, status)
-    #         VALUES (%s, %s, %s, NOW(), 'registered')
-    #     """, (user_id, event_id, ticket_id))
-        
-    #     # Decrement ticket quantity by 1 ONLY
-    #     # cursor.execute("""
-    #     #     UPDATE Tickets 
-    #     #     SET quantity_available = quantity_available - 1
-    #     #     WHERE ticket_id = %s
-    #     # """, (ticket_id,))
-        
-    #     conn.commit()
-    #     return True, "Registered successfully!"
-    # except mysql.connector.Error as err:
-    #     conn.rollback()
-    #     return False, f"Registration failed: {err}"
-    # finally:
-    #     cursor.close()
-    #     conn.close()
     conn = get_connection()
     cursor = conn.cursor()
     try:
